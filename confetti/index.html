@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>confetti</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+      background-color: black;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <script>
+    // demo1
+    // confetti({
+    //   particleCount: 200,
+    //   spread: 60,
+    //   origin: {y: 0.8}
+    // });
+
+    // demo2
+    // setTimeout(() => {
+    var count = 200;
+    var defaults = {
+      origin: {y: 0.7}
+    };
+
+    function fire(particleRatio, opts) {
+      confetti(Object.assign({}, defaults, opts, {
+        particleCount: Math.floor(count * particleRatio)
+      }));
+    }
+
+
+    fire(0.25, {
+      spread: 26,
+      startVelocity: 55,
+    });
+    fire(0.2, {
+      spread: 60,
+    });
+    fire(0.35, {
+      spread: 100,
+      decay: 0.91,
+      scalar: 0.8
+    });
+    fire(0.1, {
+      spread: 120,
+      startVelocity: 25,
+      decay: 0.92,
+      scalar: 1.2
+    });
+    fire(0.1, {
+      spread: 120,
+      startVelocity: 45,
+    });
+    // }, 300)
+
+    // demo3
+
+    setTimeout(() => {
+      var end = Date.now() + (1 * 1000);
+      // go Buckeyes!
+      // var colors = ['#bb0000', '#ffffff'];
+      (function frame() {
+        confetti({
+          particleCount: 5,
+          angle: 60,
+          spread: 55,
+          origin: {x: 0, y: 0.7},
+          // colors: colors
+        });
+        confetti({
+          particleCount: 5,
+          angle: 120,
+          spread: 55,
+          origin: {x: 1, y: 0.7},
+          // colors: colors
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      }());
+    }, 1000)
+  </script>
+</body>
+
+</html>
